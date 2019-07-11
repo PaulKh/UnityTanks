@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class TankMovementControl : MonoBehaviour
 {
-    Vector3 zeroVelocity = new Vector3(0, 0, 0);
+    Vector3 worldVelocity;
+
     public Rigidbody tankRigidBody;
     public bool turnStarted = false;
 
@@ -15,24 +16,24 @@ public class TankMovementControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        worldVelocity = new Vector3(0, tankRigidBody.velocity.y, 0);
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        tankRigidBody.velocity = zeroVelocity;
-        tankRigidBody.angularVelocity = zeroVelocity;
-
         if (Input.GetKey("w"))
         {
-            tankRigidBody.velocity = transform.forward * Time.deltaTime * 1000;
+            Vector3 tempVect = transform.forward * 10 * Time.deltaTime;
+            tankRigidBody.MovePosition(transform.position + tempVect);
         }
         else if (Input.GetKey("s"))
         {
-            tankRigidBody.velocity = -transform.forward * Time.deltaTime * 1000;
+            Vector3 tempVect = -transform.forward * 10 * Time.deltaTime;
+            tankRigidBody.MovePosition(transform.position + tempVect);
         }
-        else if(Input.GetKey("a") && !turnStarted)
+
+        if (Input.GetKey("a") && !turnStarted)
         {
             animator.SetTrigger("turnLeftTrigger");
             turnStarted = true;
