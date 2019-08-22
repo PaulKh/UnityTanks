@@ -9,9 +9,6 @@ public class TankMovementControl : MonoBehaviour
     public Rigidbody tankRigidBody;
     public bool turnStarted = false;
 
-    public GameObject turret;
-
-
     public Animator animator;
     // Start is called before the first frame update
     void Start()
@@ -43,16 +40,7 @@ public class TankMovementControl : MonoBehaviour
             animator.SetTrigger("turnRightTrigger");
             turnStarted = true;
         }
-        if (Input.GetKey("o"))
-        { 
-            Quaternion target = turret.transform.rotation * Quaternion.Euler(0, -Time.deltaTime * 200, 0);
-            turret.transform.rotation = target;
-        }
-        else if (Input.GetKey("p"))
-        {
-            Quaternion target = turret.transform.rotation * Quaternion.Euler(0, Time.deltaTime * 200, 0);
-            turret.transform.rotation = target;
-        }
+
     }
 
     public void TurnAnimationFinished()

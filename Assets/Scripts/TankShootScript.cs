@@ -55,6 +55,20 @@ public class TankShootScript : MonoBehaviour
             }
         }
     }
+
+    void FixedUpdate()
+    {
+        if (Input.GetKey("o"))
+        {
+            Quaternion target = transform.rotation * Quaternion.Euler(0, -Time.deltaTime * 200, 0);
+            transform.rotation = target;
+        }
+        else if (Input.GetKey("p"))
+        {
+            Quaternion target = transform.rotation * Quaternion.Euler(0, Time.deltaTime * 200, 0);
+            transform.rotation = target;
+        }
+    }
     void shoot(Vector3 turretPosition, Vector3 rotation)
     {
         Debug.Log("Shoot!!");
