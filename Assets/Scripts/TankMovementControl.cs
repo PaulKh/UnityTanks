@@ -45,12 +45,12 @@ public class TankMovementControl : MonoBehaviour
         }
         if (Input.GetKey("o"))
         { 
-            Quaternion target = turret.transform.rotation * Quaternion.Euler(0, 0, -Time.deltaTime * 200);
+            Quaternion target = turret.transform.rotation * Quaternion.Euler(0, -Time.deltaTime * 200, 0);
             turret.transform.rotation = target;
         }
         else if (Input.GetKey("p"))
         {
-            Quaternion target = turret.transform.rotation * Quaternion.Euler(0, 0, Time.deltaTime * 200);
+            Quaternion target = turret.transform.rotation * Quaternion.Euler(0, Time.deltaTime * 200, 0);
             turret.transform.rotation = target;
         }
     }
