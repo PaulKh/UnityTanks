@@ -8,9 +8,10 @@ public class TankMovementControl : MonoBehaviour
 
     public Rigidbody tankRigidBody;
     public bool turnStarted = false;
+    public CameraScript cameraScript;
 
-    public Animator animator;
-    // Start is called before the first frame update
+    public Tank tank;
+
     void Start()
     {
         worldVelocity = new Vector3(0, tankRigidBody.velocity.y, 0);
@@ -19,27 +20,33 @@ public class TankMovementControl : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        bool movementMade = false;
         if (Input.GetKey("w"))
         {
-            Vector3 tempVect = transform.forward * 10 * Time.deltaTime;
-            tankRigidBody.MovePosition(transform.position + tempVect);
+            tank.moveForward();
+            movementMade = true;
         }
         else if (Input.GetKey("s"))
         {
-            Vector3 tempVect = -transform.forward * 10 * Time.deltaTime;
-            tankRigidBody.MovePosition(transform.position + tempVect);
+            tank.moveBackward();
+            movementMade = true;
         }
 
-        if (Input.GetKey("a") && !turnStarted)
+        if (Input.GetKey("a"))
         {
-            animator.SetTrigger("turnLeftTrigger");
-            turnStarted = true;
+            tank.turnLeft();
         }
-        else if (Input.GetKey("d") && !turnStarted)
+        else if (Input.GetKey("d"))
         {
-            animator.SetTrigger("turnRightTrigger");
-            turnStarted = true;
+            tank.turnRight();
         }
+
+        if(movementMade)
+        {
+            cameraScript.tankMove(tankRigidBody.position);
+            Debug.Log("Tank posigtion " + tankRigidBody.position);
+        }
+
 
     }
 
