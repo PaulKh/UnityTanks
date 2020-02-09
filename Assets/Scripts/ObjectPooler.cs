@@ -34,7 +34,8 @@ public class ObjectPooler : MonoBehaviour
 
     public void initObjectToPool(GameObject objectToPool, string objectTag, bool shouldListExpand = true, int amountInPool = 0)
     {
-        if(pooledObjects.ContainsKey(objectTag))
+        Debug.Log("shdfdfkshf1234");
+        if (pooledObjects.ContainsKey(objectTag))
         {
             //Game object has already been initialized
             //No need to reinit it
@@ -50,14 +51,15 @@ public class ObjectPooler : MonoBehaviour
 
     void Awake()
     {
+        Debug.Log("shdfdfkshf awake");
         SharedInstance = this;
+        pooledObjects = new Dictionary<string, ObjectPoolItem>();
     }
 
     // Use this for initialization
     void Start()
     {
-        pooledObjects = new Dictionary<string, ObjectPoolItem>();
-
+        Debug.Log("shdfdfkshf");
     }
 
     public GameObject GetPooledObject(string objectTag)

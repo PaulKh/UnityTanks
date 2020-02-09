@@ -13,6 +13,8 @@ public class Rocket : MonoBehaviour
     {
         ObjectPooler.SharedInstance.initObjectToPool(ExplosionPrefab, ExplosionPrefab.tag, true, 5);
         rocketParticleSystem = GetComponent<ParticleSystem>();
+        var rocketParticleSystemMain = rocketParticleSystem.main;
+        rocketParticleSystemMain.stopAction = ParticleSystemStopAction.Callback;
         collisionEvents = new List<ParticleCollisionEvent>();
     }
 
@@ -57,13 +59,17 @@ public class Rocket : MonoBehaviour
     void ExplosionDamage(Vector3 explosionPos, float radius, float power)
     {
 
+        Debug.Log("Explosion damage");
         Collider[] colliders = Physics.OverlapSphere(explosionPos, radius);
         foreach (Collider hit in colliders)
         {
             Rigidbody rb = hit.GetComponent<Rigidbody>();
 
             if (rb != null)
+            {
+                Debug.Log("add force to explosion");
                 rb.AddExplosionForce(power, explosionPos, radius);
+            }
         }
     }
 }

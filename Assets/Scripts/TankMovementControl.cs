@@ -20,16 +20,13 @@ public class TankMovementControl : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        bool movementMade = false;
         if (Input.GetKey("w"))
         {
             tank.moveForward();
-            movementMade = true;
         }
         else if (Input.GetKey("s"))
         {
             tank.moveBackward();
-            movementMade = true;
         }
 
         if (Input.GetKey("a"))
@@ -39,12 +36,6 @@ public class TankMovementControl : MonoBehaviour
         else if (Input.GetKey("d"))
         {
             tank.turnRight();
-        }
-
-        if(movementMade)
-        {
-            cameraScript.tankMove(tankRigidBody.position);
-            Debug.Log("Tank posigtion " + tankRigidBody.position);
         }
 
 

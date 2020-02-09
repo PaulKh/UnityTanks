@@ -3,12 +3,8 @@
 public class CameraScript : MonoBehaviour
 {
     public float speed = 10.0f; 
-    public GameObject playerTank;
+    public Rigidbody playerTankRigidbody;
     public float sensitivity = 1.0f;
-
-    private Vector3 positionDeltaWithTank;
-    private float yaw = 0.0f;
-    private float pitch = 50.0f;
 
     protected Transform transformCamera;
     protected Transform transformParent;
@@ -29,8 +25,6 @@ public class CameraScript : MonoBehaviour
     {
         transformCamera = this.transform;
         transformParent = this.transform.parent;
-        //positionDeltaWithTank = transform.position - playerTank.transform.position;
-        //transform.eulerAngles = new Vector3(pitch, yaw, 0.0f);
     }
 
     //called after all updated
@@ -70,8 +64,8 @@ public class CameraScript : MonoBehaviour
         }
     }
 
-    public void tankMove(Vector3 position)
+    void FixedUpdate()
     {
-        this.transformParent.position = position;
+        this.transformParent.position = playerTankRigidbody.position;
     }
 }
