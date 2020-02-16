@@ -13,6 +13,11 @@ public class Rocket : MonoBehaviour
     {
         ObjectPooler.SharedInstance.initObjectToPool(ExplosionPrefab, ExplosionPrefab.tag, true, 5);
         rocketParticleSystem = GetComponent<ParticleSystem>();
+
+        //LayerMask playerTankMask = LayerMask.GetMask("PlayerTank");
+        //var collisionModule = rocketParticleSystem.collision;
+        //collisionModule.collidesWith = ~(playerTankMask);
+
         var rocketParticleSystemMain = rocketParticleSystem.main;
         rocketParticleSystemMain.stopAction = ParticleSystemStopAction.Callback;
         collisionEvents = new List<ParticleCollisionEvent>();

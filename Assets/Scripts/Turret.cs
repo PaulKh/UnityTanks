@@ -19,18 +19,19 @@ public class Turret : MonoBehaviour
         ObjectPooler.SharedInstance.initObjectToPool(RocketPrefab, RocketPrefab.tag, true, 5);
     }
 
-    public void shoot()
+    public bool shoot()
     {
         if (Utils.CurrentTime() <= shootTimeStamp + reloadTime)
         {
             //Cannot shoot yet
-            return;
+            return false;
         }
         shootTimeStamp = Utils.CurrentTime();
         var turretPosition = transform.position;
         turretPosition.y += 1.8f;
         Vector3 rotation = transform.TransformDirection(Vector3.forward) * 1000;
         shoot(turretPosition, rotation);
+        return true;
 
     }
 
