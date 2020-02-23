@@ -55,10 +55,15 @@ public class EnemyController : MonoBehaviour
 
     float angleBetweenTwoVectors(Vector3 vectorA, Vector3 vectorB, Vector3 axis)
     {
-        var angle = Vector3.Angle(vectorA, vectorB);
-        var cross = Vector3.Cross(vectorA, vectorB);
-        Debug.Log(cross);
-        if (cross.y < 0) angle = -angle;
+        float angle1 = Mathf.Atan2(vectorA.x, vectorA.z) * Mathf.Rad2Deg;
+        float angle2 = Mathf.Atan2(vectorB.x, vectorB.z) * Mathf.Rad2Deg;
+        Debug.Log(angle2 - angle1);
+        var angle = angle2 - angle1;
+        angle = (angle > 180.0f) ? angle - 360.0f : angle;
+        angle = (angle < -180.0f) ? angle + 360.0f : angle;
+        //var angle = Vector3.Angle(vectorA, vectorB);
+        //var cross = Vector3.Cross(vectorA, vectorB);
+        //if (cross.y < 0) angle = -angle;
         return angle;
     }
 }

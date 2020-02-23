@@ -33,7 +33,7 @@ public class Tank : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        tankRigidBody.centerOfMass = new Vector3(0, -1, 0);
     }
     void FixedUpdate()
     {
@@ -88,7 +88,7 @@ public class Tank : MonoBehaviour
         Collider[] colliders = Physics.OverlapSphere(groundTouchPosition.position, radius);
         foreach (Collider hit in colliders)
         {
-            if (hit.tag == "Ground")
+            if (hit.gameObject.layer == LayerMask.NameToLayer("Ground"))
             {
                 return true;
             }
